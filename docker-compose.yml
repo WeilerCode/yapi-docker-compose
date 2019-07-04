@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  yapi:
+    image: weiler-yapi
+    build: ./yapi
+    env_file: .env
+    command: node vendors/server/app.js
+    volumes:
+      - ./yapi/config.json:/yapi/config.json
+      - ./yapi/init.sh:/yapi/init.sh:ro
+    ports:
+      - 3000:3000
+    networks: 
+      - yapi
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    networks: 
+      - yapi
+    volumes:
+      - mongo:/data/db
+
+networks: 
+  yapi:
+volumes:
+  mongo:
