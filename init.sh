@@ -3,6 +3,9 @@
 . ./.env
 workdir=$(cd `dirname $0`; pwd)
 
+# clone
+git clone --depth=1 https://github.com/YMFE/yapi.git yapi/vendors
+
 # create yapi config
 front_cofig=${workdir}/yapi/config.json
 echo "Create yapi config file: ${front_cofig}"
